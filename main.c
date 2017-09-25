@@ -16,7 +16,7 @@ int main(int argc, const char *argv[]){
     FILE *fp;
 
     if(argc < 3){
-        fprintf(stderr, "Usage: %s SCRIPT_FILE COMMAND ARGS\n", argv[0]);
+        fprintf(stderr, "Usage: %s SCRIPT_FILE COMMAND [ARGS] ...\n", argv[0]);
         return 1;
     }
     fp = fopen(argv[1], "r");
