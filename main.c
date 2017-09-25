@@ -26,7 +26,6 @@ int main(int argc, const char *argv[]){
     }
     ps = process_init();
     ps = process_set(ps, argv[2], &argv[3]);
-    process_print(ps);
     process_start(ps);
     while(fgets(buf, BUFSIZ, fp) != NULL){
         if(strncmp(buf, "\n", 1) != 0){
