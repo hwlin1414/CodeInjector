@@ -6,6 +6,7 @@
 
 int command(struct process_s *, const char *);
 int command(struct process_s *ps, const char *buf){
+    sleep(1);
     process_write(ps, buf, strlen(buf));
     return 0;
 }

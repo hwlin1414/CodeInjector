@@ -48,15 +48,15 @@ struct process_s *process_set(struct process_s *ps, const char *command, char co
 }
 
 void process_destroy(struct process_s *ps){
-    char *ptr;
+    char **ptr;
     if(ps->command != NULL) free(ps->command);
     if(ps->args != NULL){
-        ptr = ps->args[0];
-        while(ptr != NULL){
-            free(ptr);
-            ptr = NULL;
-            ptr++;
+        ptr = ps->args;
+        while(*ptr != NULL){
+            free(*ptr);
+            *ptr++ = NULL;
         }
+        free(ps->args);
     }
     free(ps);
 }
@@ -86,7 +86,7 @@ int process_start(struct process_s *ps){
         return 1;
     }else if(ps->pid == 0){
         dup2(ps->fd[1], fileno(stdin));
-        dup2(ps->fd[1], fileno(stdout));
+        //dup2(ps->fd[1], fileno(stdout));
         close(ps->fd[0]);
         execvp(ps->command, ps->args);
         perror("process_start:execvp");
